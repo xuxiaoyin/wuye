@@ -126,7 +126,7 @@
 	</div>
 </template>
 <script type="text/javascript">
-	var userInfo = JSON.parse(sessionStorage.getItem('userInfos'));
+	var userInfo = JSON.parse(sessionStorage.getItem('userInfos'))||[];
 	export default{
 		name:'house_release',
 		data(){
@@ -202,7 +202,10 @@
 		},
 		created(){
 			this.get_cart()
-			this.get_pay()
+      this.get_pay()
+      var userInfo = JSON.parse(sessionStorage.getItem('userInfos'));
+      this.user_id=userInfo.user_id
+      console.log('userInfo'+this.user_id)
 			if(this.$route.query.id){
 				this.bool = true;
 				this.id = this.$route.query.id;
@@ -221,7 +224,7 @@
 			},
 			// 改变户型
 			onValuesChange(picker, values) {
-				console.log(values)
+				console.log('value'+values[1].num)
 				let  com = values[0].num+'-'+values[1].num+'-'+values[2].num
 				this.huxing_arr.map((item)=>{
 					
